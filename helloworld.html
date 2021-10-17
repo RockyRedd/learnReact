@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 引入react核心库 -->
+    <script src="./JS/react.development.js"></script>
+    <!-- 引入react扩展库 -->
+    <script src="./JS/react-dom.development.js"></script>
+    <!-- 引入babel翻译jsx -->
+    <script src="./JS/babel.min.js"></script>
+  </head>
+  <body>
+    <!-- 准备一个容器 -->
+    <div id="box1"></div>
+    <!-- 这里一定要写 type='text/babel' 而不是 type='text/javascript'-->
+    <script type="text/babel">
+      // 创建一个vdom
+      const VDOM = <h1>Hello World</h1> //不要加引号，因为写的是jsx，不是字符串
+      // 
+      ReactDOM.render(VDOM, document.querySelector('#box1'))
+    </script>
+  </body>
+</html>
