@@ -19,7 +19,8 @@
     <script type="text/babel">
       // 创建一个vdom
       const VDOM = <h1>Hello World</h1> //不要加引号，因为写的是jsx，不是字符串
-      // 
+      // 引入核心库和扩展库后，全局就多了两个对象，React 和 ReactDOM
+      // ReactDOM.render(虚拟dom，要挂载的容器) 用来渲染虚拟dom为真实DOM到页面上
       ReactDOM.render(VDOM, document.querySelector('#box1'))
     </script>
   </body>
