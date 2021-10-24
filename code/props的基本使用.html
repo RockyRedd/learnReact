@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 引入react核心库 -->
+    <script src="../JS/react.development.js"></script>
+    <!-- 引入react扩展库 -->
+    <script src="../JS/react-dom.development.js"></script>
+    <!-- 引入babel翻译jsx -->
+    <script src="../JS/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="wrapper"></div>
+    <script type="text/babel">
+      class Person extends React.Component {
+        render() {
+          const { name, age, gender } = this.props
+          return (
+            <ul>
+              <li>{name}</li>
+              <li>{age}</li>
+              <li>{gender}</li>
+            </ul>
+          )
+        }
+      }
+      const response = {
+        name: 'Tom',
+        age: 18,
+        gender: 'man',
+      }
+      ReactDOM.render(<Person {...response} />, document.getElementById('wrapper'))
+    </script>
+  </body>
+</html>

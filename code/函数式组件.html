@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 引入react核心库 -->
+    <script src="../JS/react.development.js"></script>
+    <!-- 引入react扩展库 -->
+    <script src="../JS/react-dom.development.js"></script>
+    <!-- 引入babel翻译jsx -->
+    <script src="../JS/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="wrapper"></div>
+    <script type="text/babel">
+      function MyComponent() {
+        console.log(this) //这里由于babel翻译会开启es5严格模式，所以函数的this不会指向window，所以为undefined
+        return <h3>这是个函数式组件，适用于简单组件的定义</h3>
+      }
+      // 组件标签开头必须大写，且要闭合
+      ReactDOM.render(<MyComponent />, document.querySelector('#wrapper'))
+    </script>
+  </body>
+</html>
