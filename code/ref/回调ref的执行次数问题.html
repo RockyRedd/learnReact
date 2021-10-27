@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 引入react核心库 -->
+    <script src="../../JS/react.development.js"></script>
+    <!-- 引入react扩展库 -->
+    <script src="../../JS/react-dom.development.js"></script>
+    <!-- 引入babel翻译jsx -->
+    <script src="../../JS/babel.min.js"></script>
+    <!-- 引入prop-types库来对props进行限制 -->
+    <script src="../../JS/prop-types.js"></script>
+  </head>
+  <body>
+    <div id="wrapper"></div>
+    <script type="text/babel">
+      /* 
+      如果 ref 回调函数是以内联函数的方式定义的，在更新过程中它会被执行两次，第一次传入参数 null，
+      然后第二次会传入参数 DOM 元素。这是因为在每次渲染时都会创建一个新的函数实例，
+      所以 React 先传入 null 清空旧的 ref 再传入当前 DOM 节点设置新的。
+      通过将 ref 的回调函数定义成 class 的绑定函数的方式可以避免上述问题，但是大多数情况下它是无关紧要的，
+      写内联的就行。
+      */
+      class Test extends React.Component {
+        state = {
+          isHot: true,
+        }
+        render() {
+          const { isHot } = this.state
+          return (
+            <div>
+              <h3>今天天气很{isHot ? '炎热' : '凉爽'}</h3>
+              <input
+                ref={c => {
+                  this._input = c
+                  console.log('触发ref回调', c)
+                }}
+                type="text"
+                placeholder="点击按钮输出提示"
+              />
+              {/*<input ref={this.setRef} type="text" /> */}
+              <br />
+              <button onClick={this.showText}>点我输出提示</button>
+              <button onClick={this.changeWeather}>点我改变天气状态</button>
+            </div>
+          )
+        }
+        // setRef = c => {
+        //   this._input = c
+        //   console.log('触发ref回调', c)
+        // }
+        showText = () => {
+          alert(this._input.value)
+        }
+        changeWeather = () => {
+          const { isHot } = this.state
+          this.setState({
+            isHot: !isHot,
+          })
+        }
+      }
+      ReactDOM.render(<Test />, document.getElementById('wrapper'))
+    </script>
+  </body>
+</html>

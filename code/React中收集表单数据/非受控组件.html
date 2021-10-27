@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 引入react核心库 -->
+    <script src="../../JS/react.development.js"></script>
+    <!-- 引入react扩展库 -->
+    <script src="../../JS/react-dom.development.js"></script>
+    <!-- 引入babel翻译jsx -->
+    <script src="../../JS/babel.min.js"></script>
+    <!-- 引入prop-types库来对props进行限制 -->
+    <script src="../../JS/prop-types.js"></script>
+  </head>
+  <body>
+    <div id="wrapper"></div>
+    <script type="text/babel">
+      class Login extends React.Component {
+        render() {
+          return (
+            <form action="" onSubmit={this.handleLogin}>
+              <label htmlFor="username">
+                用户名:
+                <input ref={c => (this.username = c)} id="username" type="text" />
+              </label>
+              <label htmlFor="password">
+                密码:
+                <input ref={c => (this.password = c)} id="password" type="text" />
+              </label>
+              <button>登录</button>
+            </form>
+          )
+        }
+        handleLogin = event => {
+          event.preventDefault()
+          const { username, password } = this
+          alert(`你的用户名是：${username.value}，你的密码是：${password.value}`)
+        }
+      }
+      ReactDOM.render(<Login />, document.getElementById('wrapper'))
+    </script>
+  </body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 引入react核心库 -->
+    <script src="../../JS/react.development.js"></script>
+    <!-- 引入react扩展库 -->
+    <script src="../../JS/react-dom.development.js"></script>
+    <!-- 引入babel翻译jsx -->
+    <script src="../../JS/babel.min.js"></script>
+    <!-- 引入prop-types库来对props进行限制 -->
+    <script src="../../JS/prop-types.js"></script>
+  </head>
+  <body>
+    <div id="wrapper"></div>
+    <script type="text/babel">
+      class Test extends React.Component {
+        /*
+          React上有个createRef方法，可以创造一个对象，它以键值对的方式存储用ref标记的元素，
+          该对象只能存储一个ref，若有多个元素的ref属性指向这个对象，会按顺序后面的覆盖前面的，
+          被存储的元素作为value，key固定为current
+        */
+        inputValue = React.createRef()
+        render() {
+          return (
+            <div>
+              {
+                // 检测到ref属性值为createRef创造的对象，React会自动把当前节点以current:node的形式存入对象
+              }
+              <input ref={this.inputValue} type="text" placeholder="点击按钮输出提示" />
+              <br />
+              <button onClick={this.showText}>点我输出提示</button>
+            </div>
+          )
+        }
+        showText = () => {
+          alert(this.inputValue.current.value)
+        }
+      }
+      ReactDOM.render(<Test />, document.getElementById('wrapper'))
+    </script>
+  </body>
+</html>

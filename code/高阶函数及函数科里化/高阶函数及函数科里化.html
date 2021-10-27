@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 引入react核心库 -->
+    <script src="../../JS/react.development.js"></script>
+    <!-- 引入react扩展库 -->
+    <script src="../../JS/react-dom.development.js"></script>
+    <!-- 引入babel翻译jsx -->
+    <script src="../../JS/babel.min.js"></script>
+    <!-- 引入prop-types库来对props进行限制 -->
+    <script src="../../JS/prop-types.js"></script>
+  </head>
+  <body>
+    <div id="wrapper"></div>
+    <script type="text/babel">
+      /* 
+        1.高阶函数：当一个函数满足下列两个条件中的任何一个，即可称为高阶函数
+        (1)函数A接受一个参数，该参数也是一个函数，则A是一个高阶函数
+        (2)函数A返回值仍为一个函数，则A是一个高阶函数
+        2.函数柯里化：通过函数调用后继续返回函数的形式，实现多次接收参数，最后统一处理的编码形式，即为函数柯里化
+      */
+
+      class Login extends React.Component {
+        state = {
+          username: '',
+          password: '',
+        }
+        render() {
+          return (
+            <form action="" onSubmit={this.handleSubmit}>
+              <label htmlFor="username">
+                用户名:
+                <input onChange={this.setData('username')} id="username" type="text" />
+              </label>
+              <label htmlFor="password">
+                密码:
+                <input onChange={this.setData('password')} id="password" type="text" />
+              </label>
+              <button>登录</button>
+            </form>
+          )
+        }
+        setData = stateType => {
+          return event => {
+            this.setState({
+              [stateType]: event.target.value,
+            })
+          }
+        }
+        handleSubmit = event => {
+          event.preventDefault()
+          const { username, password } = this.state
+          alert(`你的用户名是：${username}，你的密码是：${password}`)
+        }
+      }
+      ReactDOM.render(<Login />, document.getElementById('wrapper'))
+    </script>
+  </body>
+</html>

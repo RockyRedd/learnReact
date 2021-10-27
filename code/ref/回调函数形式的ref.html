@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 引入react核心库 -->
+    <script src="../../JS/react.development.js"></script>
+    <!-- 引入react扩展库 -->
+    <script src="../../JS/react-dom.development.js"></script>
+    <!-- 引入babel翻译jsx -->
+    <script src="../../JS/babel.min.js"></script>
+    <!-- 引入prop-types库来对props进行限制 -->
+    <script src="../../JS/prop-types.js"></script>
+  </head>
+  <body>
+    <div id="wrapper"></div>
+    <script type="text/babel">
+      class Test extends React.Component {
+        render() {
+          return (
+            <div>
+              <input ref={c => (this.input1 = c)} type="text" placeholder="点击按钮输出提示" />
+              <br />
+              <button onClick={this.showFirstText}>点我输出提示</button>
+              <br />
+              <input ref={c => (this.input2 = c)} onBlur={this.showSecondText} type="text" placeholder="失去焦点输出提示" />
+            </div>
+          )
+        }
+        showFirstText = () => {
+          alert(this.input1.value)
+        }
+        showSecondText = () => {
+          alert(this.input2.value)
+        }
+      }
+      ReactDOM.render(<Test />, document.getElementById('wrapper'))
+    </script>
+  </body>
+</html>
