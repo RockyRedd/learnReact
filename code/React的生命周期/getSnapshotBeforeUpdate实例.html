@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../../JS/new/react.development.js"></script>
+    <script src="../../JS/new/react-dom.development.js"></script>
+    <script src="../../JS/new/babel.min.js"></script>
+    <style>
+      #container {
+        width: 200px;
+        height: 120px;
+        background-color: skyblue;
+        overflow: auto;
+      }
+      .news {
+        height: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrapper"></div>
+    <script type="text/babel">
+      class ScrollNews extends React.Component {
+        state = {
+          newsList: [],
+        }
+
+        wrapper = React.createRef()
+
+        render() {
+          return (
+            <div>
+              <ul id="container" ref={this.wrapper}>
+                {this.state.newsList.map(item => {
+                  return (
+                    <li className="news" key={item}>
+                      {item}
+                    </li>
+                  )
+                })}
+              </ul>
+            </div>
+          )
+        }
+
+        componentDidMount() {
+          setInterval(() => {
+            const { newsList } = this.state
+            const news = '新闻' + (newsList.length + 1)
+            this.setState({
+              newsList: [news, ...newsList],
+            })
+          }, 1000)
+        }
+
+        getSnapshotBeforeUpdate() {
+          return this.wrapper.current.scrollHeight
+        }
+
+        componentDidUpdate(prevProps, prevState, snapshot) {
+          this.wrapper.current.scrollTop += this.wrapper.current.scrollHeight - snapshot
+        }
+      }
+      ReactDOM.render(<ScrollNews />, document.getElementById('wrapper'))
+    </script>
+  </body>
+</html>

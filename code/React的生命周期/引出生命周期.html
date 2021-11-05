@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 引入react核心库 -->
+    <script src="../../JS/react.development.js"></script>
+    <!-- 引入react扩展库 -->
+    <script src="../../JS/react-dom.development.js"></script>
+    <!-- 引入babel翻译jsx -->
+    <script src="../../JS/babel.min.js"></script>
+    <!-- 引入prop-types库来对props进行限制 -->
+    <script src="../../JS/prop-types.js"></script>
+  </head>
+  <body>
+    <div id="wrapper"></div>
+    <script type="text/babel">
+      class Life extends React.Component {
+        state = {
+          opacity: 1,
+        }
+        // componentDidMount() 钩子，在组件完成挂载时调用，只调用一次
+        componentDidMount() {
+          this.intervalId = setInterval(() => {
+            console.log('change');
+            let { opacity } = this.state
+            if (opacity <= 0) opacity = 1
+            opacity -= 0.1
+            this.setState({
+              opacity,
+            })
+          }, 200)
+        }
+        // render在组件初次渲染即后续状态更新时都会调用
+        render() {
+          return (
+            <div>
+              <h3 style={{ opacity: this.state.opacity }}>我是一段渐变文字</h3>
+              <button onClick={this.unmount}>点我取消组件挂载</button>
+            </div>
+          )
+        }
+        // componentWillUnmount() 钩子，在组件即将卸载还未卸载时调用，只调用一次
+        componentWillUnmount() {
+          clearInterval(this.intervalId)
+        }
+        unmount = event => {
+          // ReactDOM.unmountComponentAtNode(DOMNode) API - 用于卸载已挂载的组件
+          ReactDOM.unmountComponentAtNode(document.getElementById('wrapper'))
+        }
+      }
+      ReactDOM.render(<Life />, document.getElementById('wrapper'))
+    </script>
+  </body>
+</html>
